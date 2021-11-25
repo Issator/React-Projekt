@@ -7,11 +7,15 @@ const FilmList = (props) => {
         return <FilmDetail 
             key={film.title}
             title={film.title} 
-            desc={film.desc} />
+            desc={film.desc}
+            photo={film.photo} />
     });
 
     return (
-        <div className="ui celled list">
+        <div className="ui relaxed huge list" 
+             style={{
+                  padding: 10,
+                 }}>
             {lista}
         </div>
     );

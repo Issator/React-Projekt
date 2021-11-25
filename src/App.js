@@ -5,40 +5,37 @@ import Footer from "./components/Footer";
 
 class App extends React.Component {
     state = {filmy: [
-        {"title": "film-10", "desc": "fajny film"},
-        {"title": "film-20", "desc": "też fajny film"},
-        {"title": "film-30", "desc": "ten troche fajny"},
-        {"title": "film-40", "desc": "ten nie oglądałem"},
-        {"title": "film-50", "desc": "podobno fajny"},
-        {"title": "film-60", "desc": "różnie mówią"},
-
-        {"title": "film-11", "desc": "fajny film"},
-        {"title": "film-21", "desc": "też fajny film"},
-        {"title": "film-31", "desc": "ten troche fajny"},
-        {"title": "film-41", "desc": "ten nie oglądałem"},
-        {"title": "film-51", "desc": "podobno fajny"},
-        {"title": "film-61", "desc": "różnie mówią"},
-
-        {"title": "film-12", "desc": "fajny film"},
-        {"title": "film-22", "desc": "też fajny film"},
-        {"title": "film-32", "desc": "ten troche fajny"},
-        {"title": "film-42", "desc": "ten nie oglądałem"},
-        {"title": "film-52", "desc": "podobno fajny"},
-        {"title": "film-62", "desc": "różnie mówią"},
-
-        {"title": "film-13", "desc": "fajny film"},
-        {"title": "film-23", "desc": "też fajny film"},
-        {"title": "film-33", "desc": "ten troche fajny"},
-        {"title": "film-43", "desc": "ten nie oglądałem"},
-        {"title": "film-53", "desc": "podobno fajny"},
-        {"title": "film-63", "desc": "różnie mówią"}
+        {"title": "Dom Gucci", 
+         "desc": "Historia Patrizii Reggiani, byłej żony Maurizio Gucciego, która planowała zabić swojego męża, wnuka znanego projektanta mody Guccio Gucci.",
+         "photo": "https://fwcdn.pl/fpo/66/41/866641/7983314.6.jpg"},
+        {"title": "Nie patrz w góre", 
+         "desc": "Dwójka astronomów wyrusza w tournée po mediach, aby ostrzec ludzkość przed zmierzającą w stronę Ziemi zabójczą kometą.",
+         "photo": "https://fwcdn.pl/fpo/88/23/848823/7983647.6.jpg"},
+        {"title": "Kurier Francuski",
+         "desc": "The French Dispatch prezentuje zbiór opowiadań z ostatniego numeru amerykańskiego magazynu opublikowanego w fikcyjnym francuskim mieście XX wieku.",
+         "photo": "https://fwcdn.pl/fpo/74/18/817418/7978742.6.jpg"},
+        {"title": "Matrix Zmartwychwstania",
+         "desc": "Czwarta część serii filmowej Matrix w reżyserii Lany Wachowski",
+         "photo": "https://fwcdn.pl/fpo/85/24/838524/7983979.6.jpg"},
+        {"title": "Jurassic World: Dominion",
+         "desc": "Amerykański film przygodowy science fiction wyreżyserowany przez Colina Trevorrowa",
+         "photo": "https://fwcdn.pl/fpo/40/59/804059/7934120.6.jpg"},
+        {"title": "Spiderman: Bez drogi do domu",
+         "desc": "Kiedy cały świat dowiaduje się, że pod maską Spider Mana skrywa się Peter Parker, superbohater decyduje się zwrócić o pomoc do Doktora Strange'a.",
+         "photo": "https://fwcdn.pl/fpo/02/61/850261/7984569.6.jpg"},
+        {"title": "Tick, Tick... Boom!",
+         "desc": "Dobiegający trzydziestki, obiecujący kompozytor teatralny próbuje pogodzić miłość i przyjaźń z presją stworzenia czegoś wielkiego, zanim skończy mu się czas.",
+         "photo": "https://fwcdn.pl/fpo/74/13/847413/7978728.6.jpg"},
+        {"title": "Ostatni pojedynek",
+         "desc": "Opowieść o zdradzie i zemście rozgrywająca się w scenerii czternastowiecznej Francji, gdzie brutalność i przemoc wobec kobiet są na porządku dziennym.",
+         "photo": "https://fwcdn.pl/fpo/21/33/842133/7978744.6.jpg"},
     ]};
 
     render(){
         return (
             <div>
                 <NavBar/>
-                <FilmList filmy={this.state.filmy}/>
+                    <FilmList filmy={this.state.filmy}/>
                 <Footer/>
             </div>
         );
