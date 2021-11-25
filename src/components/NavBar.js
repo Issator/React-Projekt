@@ -7,20 +7,21 @@ class NavBar extends React.Component{
     render(){
 
         return(
-            <div className="search-bar ui segment">
-                <div className="ui middle aligned grid">
-                    <div className="two wide column">
-                        <div className="ui form">
-                            <img className="ui tiny image" src="logo512.png" alt="Logo Strony"/>
-                        </div>
-                    </div>
-                    
-                    <div className="twelve wide column">
+            <div class="ui top borderless menu">
+                <div class="item">
+                    <img className="ui tiny image" src="my_logo.svg" alt="Logo Strony"/>
+                </div>
+                <div class="item">
+                    <h1 class="ui header">
+                        Baza Danych o filmach
+                    </h1>
+                </div>
+                <div class="right menu">
+                    <div class="item">
                         <SearchBar/>
                     </div>
-
-                    <div className="two wide column">
-                        <div className="ui primary button">Zaloguj sie</div>
+                    <div class="item">
+                        <div className="ui red button">Zaloguj sie</div>
                     </div>
                 </div>
             </div>
