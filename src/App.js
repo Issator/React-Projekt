@@ -1,7 +1,10 @@
 import React from "react";
-import NavBar from "./components/NavBar";
-import FilmList from "./components/FilmList";
-import Footer from "./components/Footer";
+import FilmView from "./components/Views/FilmView";
+import { BrowserRouter, Route, Routes} from "react-router-dom";
+import SignView from "./components/Views/SignView";
+import LogView from "./components/Views/LogView";
+import AddView from "./components/Views/AddView";
+import DetailView from "./components/Views/DetailView";
 
 class App extends React.Component {
     state = {filmy: [
@@ -22,7 +25,7 @@ class App extends React.Component {
          "photo": "https://fwcdn.pl/fpo/40/59/804059/7934120.6.jpg"},
         {"title": "Spiderman: Bez drogi do domu",
          "desc": "Kiedy cały świat dowiaduje się, że pod maską Spider Mana skrywa się Peter Parker, superbohater decyduje się zwrócić o pomoc do Doktora Strange'a.",
-         "photo": "https://fwcdn.pl/fpo/02/61/850261/7984569.6.jpg"},
+         "photo": "https://fwcdn.pl/fpo/02/61/850261/7985244.6.jpg"},
         {"title": "Tick, Tick... Boom!",
          "desc": "Dobiegający trzydziestki, obiecujący kompozytor teatralny próbuje pogodzić miłość i przyjaźń z presją stworzenia czegoś wielkiego, zanim skończy mu się czas.",
          "photo": "https://fwcdn.pl/fpo/74/13/847413/7978728.6.jpg"},
@@ -33,11 +36,15 @@ class App extends React.Component {
 
     render(){
         return (
-            <div>
-                <NavBar/>
-                    <FilmList filmy={this.state.filmy}/>
-                <Footer/>
-            </div>
+            <BrowserRouter>
+                <Routes>
+                    <Route path="/"         element={<FilmView filmy={this.state.filmy}/>}/>
+                    <Route path="/signup"   element={<SignView/>}/>
+                    <Route path="/signin"   element={<LogView/>}/>
+                    <Route path="/add"      element={<AddView/>}/>
+                    <Route path="/detail"   element={<DetailView/>}/>
+                </Routes>
+            </BrowserRouter>
         );
     }
 

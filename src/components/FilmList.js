@@ -8,7 +8,8 @@ const FilmList = (props) => {
             key={film.title}
             title={film.title} 
             desc={film.desc}
-            photo={film.photo} />
+            photo={film.photo} 
+            showDetails={true}/>
     });
 
     return (
