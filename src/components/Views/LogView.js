@@ -1,13 +1,65 @@
-import react from "react";
+import axios from "axios";
+import React from "react";
 import { Link } from "react-router-dom";
 
-export default class LogView extends react.Component{
+export default class LogView extends React.Component{
 
     state = {
         account: {
             login: "",
             password: ""
+        },
+        errors: {}
+    }
+
+    handleChangeRoute = () => {
+        this.props.history.push('/');
+        window.location.reload();
+    };
+
+    validate = () => {
+        const errors = {};
+
+        const {account} = this.state;
+        if (account.login.trim() === '') {
+            errors.login = 'Login is required!';
         }
+        if (account.password.trim() === '') {
+            errors.password = 'Password is required!';
+        }
+
+        return Object.keys(errors).length === 0 ? null : errors;
+    };
+
+    handleChange = (event) => {
+        const account = {...this.state.account};
+        account[event.currentTarget.name] = event.currentTarget.value;
+        this.setState({account});
+    };
+
+    handleSubmit = (event) => {
+        event.preventDefault();
+
+        const errors = this.validate();
+        this.setState({errors: errors || {}});
+        if (errors) return;
+
+        axios({
+            method: 'post',
+            url: 'https://pr-movies.herokuapp.com/api/user/auth',
+            data: {
+                login: this.state.account.name,
+                password: this.state.account.password
+            }
+        }).then((respone) => {
+            localStorage.setItem('token', respone.data.token);
+            this.handleChangeRoute();
+        }).catch((error) => {
+            const errors = {}
+            errors.logError = "Nazwa konta lub hasło niepoprawne!";
+            this.setState({errors: errors || {}})
+            console.log(error)
+        })
     }
 
     render(){
@@ -28,29 +80,52 @@ export default class LogView extends react.Component{
 
                     <div className="ui stacked segment">
                         <div className="ui form">
-                            <form>
+                            <form onSubmit={this.handleSubmit}>
 
                                 <div className="field">
                                     <label>login</label>
-                                    <input type="text" placeholder="login"/>
+                                    <input 
+                                        value={this.state.account.login}
+                                        name="login"
+                                        onChange={this.handleChange}
+                                        type="text" 
+                                        id="login"
+                                        placeholder="Login"/>
+                                    {this.state.errors.login &&
+                                    <div className="ui red message">
+                                        <div className="header">
+                                            {this.state.errors.login}
+                                        </div>
+                                    </div>}
                                 </div>
 
                                 <div className="field">
                                     <label>hasło</label>
-                                    <input type="password" placeholder="password"/>
+                                    <input 
+                                        value={this.state.account.password}
+                                        name="password"
+                                        onChange={this.handleChange}
+                                        type="password"
+                                        id="password" 
+                                        placeholder="Hasło"/>
+                                        {this.state.errors.password &&
+                                        <div className="ui red message">
+                                            <div className="header">
+                                                {this.state.errors.password}
+                                            </div>
+                                        </div>}
                                 </div>
 
                                 <button type="submit" className="fluid ui red button">Zaloguj</button>
-
-                                <div className="ui error message">
-                                    <div className="header">
-                                        Title of the message
-                                    </div>
-                                    Text of the message
-                                </div>
-
                             </form>
                         </div>
+
+                        {this.state.errors.logError &&
+                            <div className="ui red message">
+                                <div className="header">
+                                    {this.state.errors.logError}
+                                </div>
+                        </div>}
                     </div>
 
                     

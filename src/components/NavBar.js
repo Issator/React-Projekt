@@ -4,7 +4,6 @@ import SearchBar from "./SearchBar";
 
 class NavBar extends React.Component{
 
-
     render(){
 
         return(
