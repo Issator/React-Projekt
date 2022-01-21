@@ -55,7 +55,7 @@ export default class SignView extends react.Component {
             data: {
                 name: this.state.account.name,
                 email: this.state.account.email,
-                password: this.state.account.password,
+                password: this.state.account.password
             }
         }).then(() => {
             const errors = {};
@@ -63,7 +63,7 @@ export default class SignView extends react.Component {
             this.setState({errors: errors || {}})
         }).catch((error) => {
             const errors = {};
-            errors.logError = "Nazwa konta lub hasło niepoprawne!"
+            errors.logError = "Nazwa konta, email lub hasło niepoprawne!"
             this.setState({errors: errors || {}})
             console.log(error);
         })
@@ -88,16 +88,16 @@ export default class SignView extends react.Component {
                 <div className="ui stacked segment">
                     <div className="ui form">
                         <form onSubmit={this.handleSubmit}>
-
-                            <div className="field">
+                        {/*
+                            <div className="field"> 
                                 <label>login</label>
                                 <input 
                                     value={this.state.account.login}
                                     name="login"
-                                    //onChange={this.handleChange}
+                                    onChange={this.handleChange}
                                     type="text" 
                                     id="login"
-                                    placeholder="Podaj login (TYMCAZSOWY BRAK)"/>
+                                    placeholder="Podaj login"/>
                                 {this.state.errors.login &&
                                 <div className="ui red message">
                                     <div className="header">
@@ -105,7 +105,7 @@ export default class SignView extends react.Component {
                                     </div>
                                 </div>}
                             </div>
-
+                         */}
                             <div className="field">
                                 <label>nazwa</label>
                                 <input 
@@ -172,7 +172,7 @@ export default class SignView extends react.Component {
                     {this.state.errors.success &&
                         <div className="ui green message">
                             <div className="header">
-                                {this.state.errors.succes}
+                                {this.state.errors.success}
                             </div>
                     </div>}
                 </div>

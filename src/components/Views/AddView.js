@@ -1,4 +1,7 @@
+import axios from "axios";
 import react from "react";
+import { isExpired } from "react-jwt";
+import { Link } from "react-router-dom";
 
 export default class AddView extends react.Component {
 
@@ -40,9 +43,30 @@ export default class AddView extends react.Component {
         const errors = this.validate();
         this.setState({errors: errors || {}});
         if (errors) return;
+
+        axios({
+            method: 'post',
+            url: 'https://pr-movies.herokuapp.com/api/movies',
+            data: {
+                title: this.state.film.title,
+                image: this.state.film.photo,
+                content: this.state.film.desc
+            }
+        }).then((response) => {
+            const errors = {}
+            errors.success = "Film wysłano pomyślnie";
+            this.setState({errors: errors || {}})
+        }).catch((error) => {
+            const errors = {}
+            errors.logError = "Dane wejściowe niepoprawne!";
+            this.setState({errors: errors || {}})
+            console.log(error)
+        })
+
     }
 
-    render(){
+
+    userLogged(){
         return(
             <div className="ui centered aligned page grid" 
             style={{
@@ -115,12 +139,20 @@ export default class AddView extends react.Component {
 
                                 <button type="submit" className="fluid ui red button">Dodaj film</button>
 
-                                <div className="ui error message">
-                                    <div className="header">
-                                        Title of the message
-                                    </div>
-                                    Text of the message
-                                </div>
+                                {this.state.errors.logError &&
+                                    <div className="ui red message">
+                                        <div className="header">
+                                            {this.state.errors.logError}
+                                        </div>
+                                </div>}
+
+                                {this.state.errors.success &&
+                                    <div className="ui green message">
+                                        <div className="header">
+                                            {this.state.errors.success}
+                                            <Link to="/"> Przejdź do strony głównej!</Link>
+                                        </div>
+                                </div>}
 
                             </form>
                         </div>
@@ -128,5 +160,48 @@ export default class AddView extends react.Component {
                 </div>
             </div>
         )
+    }
+
+    userNotLogged(){
+        return(
+            <div className="ui centered aligned page grid" 
+            style={{
+                display: 'flex', 
+                justifyContent: 'center',
+                alignItems: 'center',
+                height: '100vh'
+            }}>
+
+                <div className="column" style={{maxWidth: 450}}>
+                    <div className="ui stacked segment">
+
+                    <h2 class="ui red header">
+                        <i class="user icon"></i>
+                            <div class="content"> Nie jesteś zalogowany!
+                            <div class="sub header">Aby dodać film, musisz zalogować się na stronie</div>
+                        </div>
+                    </h2>
+                        
+                        <div className="ui container" style={{textAlign: 'center'}}>
+                            <div>
+                                <Link to="/signin"> <div className="ui red button">Zaloguj się</div>    </Link>
+                                <Link to="/">       <div className="ui red button">Wróć do menu</div>   </Link>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        )
+    }
+
+    render(){
+
+        const isNotLoggedIn = isExpired(localStorage.getItem('token'))
+
+        if(isNotLoggedIn){
+            return(this.userNotLogged())
+        }else{
+            return(this.userLogged())
+        }
     }
 }

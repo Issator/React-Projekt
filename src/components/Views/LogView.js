@@ -1,6 +1,6 @@
 import axios from "axios";
 import React from "react";
-import { Link } from "react-router-dom";
+import { Link} from "react-router-dom";
 
 export default class LogView extends React.Component{
 
@@ -11,11 +11,6 @@ export default class LogView extends React.Component{
         },
         errors: {}
     }
-
-    handleChangeRoute = () => {
-        this.props.history.push('/');
-        window.location.reload();
-    };
 
     validate = () => {
         const errors = {};
@@ -48,12 +43,14 @@ export default class LogView extends React.Component{
             method: 'post',
             url: 'https://pr-movies.herokuapp.com/api/user/auth',
             data: {
-                login: this.state.account.name,
+                login: this.state.account.login,
                 password: this.state.account.password
             }
         }).then((respone) => {
             localStorage.setItem('token', respone.data.token);
-            this.handleChangeRoute();
+            const errors = {}
+            errors.success = "Zalogowano pomyślnie!";
+            this.setState({errors: errors || {}})
         }).catch((error) => {
             const errors = {}
             errors.logError = "Nazwa konta lub hasło niepoprawne!";
@@ -124,6 +121,14 @@ export default class LogView extends React.Component{
                             <div className="ui red message">
                                 <div className="header">
                                     {this.state.errors.logError}
+                                </div>
+                        </div>}
+
+                        {this.state.errors.success &&
+                            <div className="ui green message">
+                                <div className="header">
+                                    {this.state.errors.success}
+                                    <Link to="/"> Przejdź do strony głównej!</Link>
                                 </div>
                         </div>}
                     </div>
