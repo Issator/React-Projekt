@@ -5,7 +5,7 @@ import SignView from "./components/Views/SignView";
 import LogView from "./components/Views/LogView";
 import AddView from "./components/Views/AddView";
 import DetailView from "./components/Views/DetailView";
-
+import NoSiteView from "./components/Views/NoSiteView";
 class App extends React.Component {
     state = {filmy: [
         {"title": "Dom Gucci", 
@@ -38,11 +38,12 @@ class App extends React.Component {
         return (
             <BrowserRouter>
                 <Routes>
-                    <Route path="/"         element={<FilmView filmy={this.state.filmy}/>}/>
+                    <Route path="/"         element={<FilmView/>}/>
                     <Route path="/signup"   element={<SignView/>}/>
                     <Route path="/signin"   element={<LogView/>}/>
                     <Route path="/add"      element={<AddView/>}/>
                     <Route path="/detail"   element={<DetailView/>}/>
+                    <Route path="*"         element={<NoSiteView/>}/>
                 </Routes>
             </BrowserRouter>
         );

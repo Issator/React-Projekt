@@ -3,23 +3,55 @@ import FilmDetail from "../FilmDetail";
 import Footer from "../Footer";
 import NavBar from "../NavBar";
 
-const film={"title": "Dom Gucci", 
-"desc": "Historia Patrizii Reggiani, byłej żony Maurizio Gucciego, która planowała zabić swojego męża, wnuka znanego projektanta mody Guccio Gucci.",
-"photo": "https://fwcdn.pl/fpo/66/41/866641/7983314.6.jpg"}
-
 export default class DetailView extends react.Component {
+    
+    state = {
+        id: localStorage.getItem("filmId"),
+        isLoaded: false,
+        error: null,
+        film: null
+    }
+
+    componentDidMount(){
+        fetch("https://pr-movies.herokuapp.com/api/movies/" + this.state.id)
+        .then(res => res.json())
+        .then((result) => {
+            this.setState({
+                isLoaded: true,
+                film: result
+            });
+        },
+        (error) => {
+            this.setState({
+                isLoaded: true,
+                error: error
+            });
+        })
+    }
+
+
     render(){
-        return (
+        const film = this.state.film
+        if(this.state.isLoaded){
+            return (
+                <div>
+                    <NavBar/>
+                    <div className="ui relaxed huge list" style={{padding: 10, minHeight: "100vh"}}>
+                        <FilmDetail 
+                            key={film.title}
+                            title={film.title} 
+                            desc={film.content}
+                            photo={film.image} />
+                    </div>
+                    <Footer/>
+                </div>);
+        }else{
+            return(
             <div>
                 <NavBar/>
-                <div className="ui relaxed huge list" style={{padding: 10, minHeight: "100vh"}}>
-                    <FilmDetail 
-                        key={film.title}
-                        title={film.title} 
-                        desc={film.desc}
-                        photo={film.photo} />
-                </div>
-                <Footer/>
-            </div>);
+                ładowanie...
+            </div>
+            )
+        }
     }
 }

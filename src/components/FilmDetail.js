@@ -1,5 +1,6 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { Link} from "react-router-dom";
+
 
 const FilmDetail = film => {
     return(
@@ -18,7 +19,12 @@ const FilmDetail = film => {
                 <div className="description">
                     {film.desc}
                 </div>
-                {film.showDetails ? (<Link to="/detail"> Więcej </Link>) : null}
+                {film.showDetails ? (
+                    <Link to='/detail'>
+                         <button className="ui red button"
+                                 onClick={() => localStorage.setItem('filmId', film.id)}>Więcej</button> 
+                    </Link>
+                ) : null}
             </div>
         </div>
     );
