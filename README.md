@@ -3,6 +3,8 @@ https:||//docs.google.com/presentation/d/1VUVWoezZEU8qT-Gd3MOfmcCpTiK_MOxyFvMiFw
 
 drugi: https:||//docs.google.com/presentation/d/10A9_3bTQwOfnT8XqhNFoojw0eU1CsuNejzrtdhoNabw/edit?usp=sharing
 
+trzeci: https:||//docs.google.com/presentation/d/1Ha6MtOjb_AXaGTp2AUXj0_OVzStpH1ZWj4IXebv-pJY/edit?usp=sharing
+
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 ## Available Scripts
